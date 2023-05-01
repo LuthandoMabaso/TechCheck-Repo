@@ -1,0 +1,89 @@
+using System.Net.Http.Headers;
+using TechCheck;
+using NUnit.Framework;
+namespace VowelsTesting
+{
+   
+    public class GenerateTests
+    {
+        [Test]
+        public void DuplicatesCheck_Test()
+        {
+            //Arrange
+            string userInput = "I like eating apples";
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            string expectedOutput = "ileap";
+
+            //Act
+            var actualOutput = Program.Duplicates_Check(userInputText);
+
+            //Assert
+            Assert.That(actualOutput, Is.EqualTo(expectedOutput));
+        }
+
+        [Test]
+        public void CountVowels_Test()
+        {
+            //Arrange
+            string userInput = "I like eating apples";
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            int expectedOutput = 8;
+
+            //Act
+            var actualOutput = Program.CountVowels(userInputText);
+
+            //Assert
+            Assert.That(actualOutput, Is.EqualTo(expectedOutput));
+        }
+
+        [Test]
+        public void CheckVowelsOrNonVowels_Test1()
+        {
+            //Arrange
+            string userInput = "I eat";
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            string expectedOupt = "The text has more vowels than non vowels";
+
+            //Act
+            var actualOutput = Program.CheckVowelsOrNonVowels(userInputText);
+
+            //Assert
+            Assert.That(actualOutput, Is.EqualTo(expectedOupt));
+        }
+
+        [Test]
+        public void CheckVowelsOrNonVowels_Test2()
+        {
+            //Arrange
+            string userInput = "that dog";
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            string expectedOupt = "The text has more non vowels than vowels";
+
+            //Act
+            var actualOutput = Program.CheckVowelsOrNonVowels(userInputText);
+
+            //Assert
+            Assert.That(actualOutput, Is.EqualTo(expectedOupt));
+        }
+
+        [Test]
+        public void CheckVowelsOrNonVowels_Test3()
+        {
+            //Arrange
+            string userInput = "3 a";
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            string expectedOupt = "The text has an equal amount of vowels and non vowels";
+
+            //Act
+            var actualOutput = Program.CheckVowelsOrNonVowels(userInputText);
+
+            //Assert
+            Assert.That(actualOutput, Is.EqualTo(expectedOupt));
+        }
+    }
+}
