@@ -1,0 +1,153 @@
+using System;
+using System.Linq;
+namespace TechCheck
+{
+    public class Program
+    {
+ 
+        // 1. Duplicate check – Represented by a ‘1’ 
+        public static string Duplicates_Check(string userInputText)
+        {
+            string duplicates = "";
+
+            //Nested for loop to check every character in a user text
+            for (int i = 0; i < userInputText.Length; i++)
+            {
+                for (int j = i + 1; j < userInputText.Length; j++)
+                {
+                    if (userInputText[i] == userInputText[j] && !duplicates.Contains(userInputText[i]))
+                    {
+                        duplicates += userInputText[i];
+                    }
+                }
+            }
+            return duplicates;
+        }
+
+        // 2. Count the number of unique vowels – Represented by ‘2’
+        public static int CountVowels(string userInputText)
+        {
+            int count = 0;
+
+            //for loop to check every character in a user text
+            for (int i = 0; i < userInputText.Length; i++)
+            {
+                if ("aeiouAEIOU".Contains(userInputText[i]))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        // 3. Output if there are more unique vowels or unique non vowels – Represented by ‘3’
+        public static string CheckVowelsOrNonVowels(string userInputText)
+        {
+            int vowels = 0;
+            int nonVowels = 0;
+
+            //for loop to check every character in the user text
+            for (int i = 0; i < userInputText.Length; i++)
+            {
+                if ("aeiouAEIOU".Contains(userInputText[i]))
+                {
+                    vowels++;
+                }
+                else if (char.IsLetter(userInputText[i]) || char.IsDigit(userInputText[i]))
+                {
+                    nonVowels++;
+                }
+            }
+
+            //Perform three functionalities
+            if (vowels > nonVowels)
+            {
+                return "The text has more vowels than non vowels";
+            }
+            else if (nonVowels > vowels)
+            {
+                return "The text has more non vowels than vowels";
+            }
+            else
+            {
+                return "The text has an equal amount of vowels and non vowels";
+            }
+        }
+        //Main Method
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Enter text to be analysed");
+            string userInput = Console.ReadLine();
+            string userInputText = String.Concat(userInput.Where(ch => !Char.IsWhiteSpace(ch))).ToLower();
+
+            Console.WriteLine(@"Enter which operations to do on the supplied text, ‘1’ for a duplicate character check,
+                              ‘2’ to count the number of vowels, ‘3’ to check if there are more vowels or non vowels, 
+                              or any combination of ‘1’, ‘2’ and ‘3’ to perform multiple checks.");
+                             
+            string userOperation = Console.ReadLine();
+            string userOperationInput = String.Concat(userOperation.Where(ch => !Char.IsWhiteSpace(ch)));
+
+            if (userOperationInput == "1")
+            {
+                string duplicates = Duplicates_Check(userInputText);
+
+                if (duplicates != "")
+                {
+                    Console.WriteLine($"Found the following duplicates: {duplicates}");
+                }
+                else
+                {
+                    Console.WriteLine("No duplicates were found");
+                }
+            }
+            else if (userOperationInput == "2")
+            {
+                int count = CountVowels(userInputText);
+
+                if (count > 0)
+                {
+                    Console.WriteLine($"The number of vowels is {count}");
+                }
+                else
+                {
+                    Console.WriteLine("No vowels were found");
+                }
+            }
+            else if (userOperationInput == "3")
+            {
+                string vowelsOrNonVowels = CheckVowelsOrNonVowels(userInputText);
+
+                Console.WriteLine(vowelsOrNonVowels);
+            }
+
+            if (userOperationInput == "12")
+            {
+                string duplicates = Duplicates_Check(userInputText);
+
+                if (duplicates != "")
+                {
+                    Console.WriteLine($"Found the following duplicates: {duplicates}");
+                }
+                else
+                {
+                    Console.WriteLine("No duplicates were found");
+                }
+
+                int count = CountVowels(userInputText);
+
+                if (count > 0)
+                {
+                    Console.WriteLine($"The number of vowels is {count}");
+                }
+                else
+                {
+                    Console.WriteLine("No vowels were found");
+                }
+            }
+
+            Console.ReadLine();
+
+        }
+    }
+   
+}
